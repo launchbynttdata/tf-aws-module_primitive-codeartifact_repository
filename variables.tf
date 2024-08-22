@@ -15,6 +15,11 @@ variable "repository" {
   type        = string
 }
 
+variable "domain" {
+  description = "The domain that contains the created repository."
+  type        = string
+}
+
 variable "domain_owner" {
   description = "The account number of the AWS account that owns the domain."
   type        = string
