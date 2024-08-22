@@ -18,7 +18,3 @@ module "codeartifact_repository" {
 
   tags = var.tags
 }
-
-resource "aws_codeartifact_domain" "example" {
-  domain = "example"
-}

@@ -9,26 +9,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-variable "domain" {
-  description = "The name of the  repository domain."
-  type        = string
-}
 
 variable "repository" {
   description = "The name of the repository to create."
   type        = string
-}
-
-variable "domain_owner" {
-  description = "The account number of the AWS account that owns the domain."
-  type        = string
-  default     = null
-}
-
-variable "description" {
-  description = "The description of the repository."
-  type        = string
-  default     = null
 }
 
 variable "tags" {
