@@ -15,6 +15,11 @@ variable "repository" {
   type        = string
 }
 
+variable "domain" {
+  description = "The domain that contains the created repository."
+  type        = string
+}
+
 variable "tags" {
   description = "Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level."
   type        = map(string)

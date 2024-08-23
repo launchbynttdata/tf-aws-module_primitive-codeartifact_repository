@@ -10,15 +10,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-module "codeartifact_repository" {
-  source = "../.."
+terraform {
+  required_version = ">= 1.5.0, <= 1.5.5"
 
-  repository = var.repository
-  domain     = aws_codeartifact_domain.example.domain
-
-  tags = var.tags
-}
-
-resource "aws_codeartifact_domain" "example" {
-  domain = var.domain
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
 }

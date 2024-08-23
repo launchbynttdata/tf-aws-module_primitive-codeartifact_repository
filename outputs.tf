@@ -20,6 +20,18 @@ output "arn" {
   value       = aws_codeartifact_repository.this.arn
 }
 
+output "domain" {
+  description = "The domain of the repository."
+  value       = aws_codeartifact_repository.this.domain
+}
+
+
+output "repository" {
+  description = "The name of the repository."
+  value       = aws_codeartifact_repository.this.repository
+}
+
+
 output "administrator_account" {
   description = "The account number of the AWS account that manages the repository."
   value       = aws_codeartifact_repository.this.administrator_account
