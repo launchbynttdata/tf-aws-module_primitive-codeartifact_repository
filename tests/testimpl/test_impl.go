@@ -22,7 +22,6 @@ var standardTags = map[string]string{
 func TestCodeArtifact(t *testing.T, ctx types.TestContext) {
 
 	t.Run("TestARNAndIDPatternMatches", func(t *testing.T) {
-		checkARNFormat(t, ctx)
 		checkARNIDFormat(t, ctx)
 	})
 
@@ -41,10 +40,7 @@ func checkARNIDFormat(t *testing.T, ctx types.TestContext) {
 	actualID := terraform.Output(t, ctx.TerratestTerraformOptions(), "id")
 	assert.NotEmpty(t, actualID, "ARN ID is empty")
 	assert.Regexp(t, expectedPatternARN, actualID, "ID does not match expected pattern")
-}
 
-func checkARNFormat(t *testing.T, ctx types.TestContext) {
-	expectedPatternARN := "^arn:aws:codeartifact:[a-z0-9-]+:[0-9]{12}:[a-z0-9-]+/.+$"
 	actualARN := terraform.Output(t, ctx.TerratestTerraformOptions(), "arn")
 	assert.NotEmpty(t, actualARN, "ARN is empty")
 	assert.Regexp(t, expectedPatternARN, actualARN, "ARN does not match expected pattern")
