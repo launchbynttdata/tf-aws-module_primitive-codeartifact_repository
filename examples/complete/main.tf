@@ -20,5 +20,5 @@ module "codeartifact_repository" {
 }
 
 resource "aws_codeartifact_domain" "example" {
-  domain = "example"
+  domain = var.domain
 }
