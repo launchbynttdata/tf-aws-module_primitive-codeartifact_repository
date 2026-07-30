@@ -19,7 +19,7 @@ var standardTags = map[string]string{
 	"provisioner": "Terraform",
 }
 
-func TestCodeArtifact(t *testing.T, ctx types.TestContext) {
+func TestComposableCodeArtifact(t *testing.T, ctx types.TestContext) {
 
 	t.Run("TestARNAndIDPatternMatches", func(t *testing.T) {
 		checkARNIDFormat(t, ctx)
