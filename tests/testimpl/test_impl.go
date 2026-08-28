@@ -19,7 +19,7 @@ var standardTags = map[string]string{
 	"provisioner": "Terraform",
 }
 
-func TestCodeArtifact(t *testing.T, ctx types.TestContext) {
+func TestComposableCodeArtifact(t *testing.T, ctx types.TestContext) {
 
 	t.Run("TestARNAndIDPatternMatches", func(t *testing.T) {
 		checkARNIDFormat(t, ctx)
@@ -37,19 +37,19 @@ func TestCodeArtifact(t *testing.T, ctx types.TestContext) {
 func checkARNIDFormat(t *testing.T, ctx types.TestContext) {
 	expectedPatternARN := "^arn:aws:codeartifact:[a-z0-9-]+:[0-9]{12}:[a-z0-9-]+/.+$"
 
-	actualID := terraform.Output(t, ctx.TerratestTerraformOptions(), "id")
+	actualID := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "id")
 	assert.NotEmpty(t, actualID, "ARN ID is empty")
 	assert.Regexp(t, expectedPatternARN, actualID, "ID does not match expected pattern")
 
-	actualARN := terraform.Output(t, ctx.TerratestTerraformOptions(), "arn")
+	actualARN := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "arn")
 	assert.NotEmpty(t, actualARN, "ARN is empty")
 	assert.Regexp(t, expectedPatternARN, actualARN, "ARN does not match expected pattern")
 }
 
 func testCodeArtifact(t *testing.T, ctx types.TestContext) {
 	input := &codeartifact.DescribeRepositoryInput{
-		Domain:     aws.String(terraform.Output(t, ctx.TerratestTerraformOptions(), "domain")),
-		Repository: aws.String(terraform.Output(t, ctx.TerratestTerraformOptions(), "repository")),
+		Domain:     aws.String(terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "domain")),
+		Repository: aws.String(terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "repository")),
 	}
 
 	client := GetCodeArtifactClient(t)
@@ -59,15 +59,15 @@ func testCodeArtifact(t *testing.T, ctx types.TestContext) {
 
 	repository := result.Repository
 
-	expectedName := terraform.Output(t, ctx.TerratestTerraformOptions(), "repository")
+	expectedName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "repository")
 	assert.NoError(t, err)
 	actualName := repository.Name
 	assert.Equal(t, expectedName, *actualName, "Repository Name does not match")
 }
 
 func checkTagsMatch(t *testing.T, ctx types.TestContext) {
-	expectedTags := terraform.OutputMap(t, ctx.TerratestTerraformOptions(), "tags_all")
-	actualARN := terraform.Output(t, ctx.TerratestTerraformOptions(), "arn")
+	expectedTags := terraform.OutputMapContext(t, context.Background(), ctx.TerratestTerraformOptions(), "tags_all")
+	actualARN := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "arn")
 	client := GetCodeArtifactClient(t)
 
 	input := &codeartifact.ListTagsForResourceInput{

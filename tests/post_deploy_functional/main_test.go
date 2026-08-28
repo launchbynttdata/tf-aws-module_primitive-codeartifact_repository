@@ -20,5 +20,5 @@ func TestCodeArtifactModule(t *testing.T) {
 		SetTestConfigFileName(infraTFVarFileNameDefault).
 		Build()
 
-	lib.RunSetupTestTeardown(t, *ctx, testimpl.TestCodeArtifact)
+	lib.RunSetupTestTeardown(t, *ctx, testimpl.TestComposableCodeArtifact)
 }
